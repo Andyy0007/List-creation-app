@@ -1,0 +1,115 @@
+/* Global container */
+.app-container {
+  padding: 2rem;
+  text-align: center;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+/* Header styling */
+.list-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.button {
+  background-color: #246fe8;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #185bed;
+}
+
+/* Wrapper for multiple lists */
+.lists-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Individual list container */
+.list-container {
+  background-color: #f0f8ff;
+  padding: 1rem;
+  border-radius: 12px;
+  width: 250px;
+  height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title checkbox label */
+.list-title {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+/* Item card style */
+.item-card {
+  background-color: #fff;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.failure-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.failure-title {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+
+/* Item title (main text) */
+.item-title {
+  font-weight: 600;
+}
+
+/* Item subtitle (species, italic) */
+.item-subtitle {
+  font-size: 0.85rem;
+  color: #555;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.loading {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .lists-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .list-container {
+    width: 90%;
+    height: auto;
+  }
+}
