@@ -1,7 +1,7 @@
 // src/components/Loading.jsx
 export default function Loading() {
   return (
-    <div className="p-8 text-center text-lg font-medium">
+    <div className="flex items-center justify-center h-screen text-lg font-medium">
       Loading…
     </div>
   )
