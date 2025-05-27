@@ -68,11 +68,11 @@ function App() {
   const listNums = [...new Set(data.map(i => i.list_number))]
 
   return (
-    <div className="p-6">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-start p-6">
       <h1 className="list-header">List Creation</h1>
 
       {!creating && (
-        <div className="text-center mb-4">
+        <div className="mb-4">
           <button
             onClick={handleCreateClick}
             className="button"
