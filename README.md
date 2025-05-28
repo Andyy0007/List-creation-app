@@ -13,7 +13,7 @@ This is a responsive React application that allows users to select two existing 
 
 ##  Live Demo
 
-[🔗 Click here to view the deployed app](https://github.com/Andyy0007/List-creation-app)
+[🔗 Click here to view the deployed app](https://Andyy0007.github.io/List-creation-app)
 
 ## Tech Stack
 
