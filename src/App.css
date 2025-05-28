@@ -98,6 +98,29 @@
   margin-top: 0.2rem;
 }
 
+/* Arrow buttons */
+.arrow-buttons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.arrow-buttons button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.arrow-buttons img {
+  width: 20px;
+  height: 20px;
+}
+
+.arrow-buttons button:hover img {
+  filter: brightness(0.8);
+}
+
 /* Failure and Loading Views */
 .failure-container,
 .loading {
