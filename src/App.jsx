@@ -93,8 +93,8 @@ function App() {
               title="New List"
               items={newListItems}
               direction="both"
-              onMoveItem={item => {
-                const target = item.list_number === selected[0] ? selected[1] : selected[0]
+              onMoveItem={(item, dir) => {
+                const target = dir === 'left' ? selected[0] : selected[1]
                 moveFromNew(item, target)
               }}
             />
