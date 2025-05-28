@@ -1,3 +1,16 @@
+//App.jsx
+/* This is the heart of your List Creation App, responsible for:
+
+Fetching list data
+
+Managing list selection
+
+Handling the creation of a new combined list
+
+Moving items between lists
+
+*/
+
 import { useState, useEffect } from 'react'
 import useListApi from './hooks/useListApi'
 import Loading from './components/Loading'
@@ -93,8 +106,8 @@ function App() {
               title="New List"
               items={newListItems}
               direction="both"
-              onMoveItem={item => {
-                const target = item.list_number === selected[0] ? selected[1] : selected[0]
+              onMoveItem={(item, dir) => {
+                const target = dir === 'left' ? selected[0] : selected[1]
                 moveFromNew(item, target)
               }}
             />

@@ -1,4 +1,11 @@
 export default function ListItem({ item, onMove, direction }) {
+  const arrowStyle = {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: '4px'
+  }
+
   return (
     <div className="item-card">
       <div>
@@ -6,13 +13,26 @@ export default function ListItem({ item, onMove, direction }) {
         <p className="item-subtitle">{item.species}</p>
       </div>
       {onMove && (
-        <button onClick={() => onMove(item)} style={{ background: 'none', border: 'none' }}>
-          <img
-            src={`https://assets.ccbp.in/frontend/react-js/${direction}-arrow-img.png`}
-            alt={`${direction} arrow`}
-            style={{ width: '20px' }}
-          />
-        </button>
+        <div className="arrow-buttons">
+          {(direction === 'left' || direction === 'both') && (
+            <button onClick={() => onMove(item, 'left')} style={arrowStyle}>
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/left-arrow-img.png"
+                alt="left arrow"
+                style={{ width: '20px' }}
+              />
+            </button>
+          )}
+          {(direction === 'right' || direction === 'both') && (
+            <button onClick={() => onMove(item, 'right')} style={arrowStyle}>
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/right-arrow-img.png"
+                alt="right arrow"
+                style={{ width: '20px' }}
+              />
+            </button>
+          )}
+        </div>
       )}
     </div>
   )
