@@ -1,20 +1,25 @@
-/* Global container */
+/* Global container */ 
 .app-container {
   padding: 2rem;
   text-align: center;
   background-color: #fff;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Header styling */
-.list-header {
-  font-size: 1.8rem;
+.list-header,
+.header h1 {
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 /* Button */
-.button {
+.button,
+.create-button button {
   background-color: #246fe8;
   color: white;
   border: none;
@@ -26,17 +31,26 @@
   transition: background-color 0.3s ease;
 }
 
-.button:hover {
+.button:hover,
+.create-button button:hover {
   background-color: #185bed;
+}
+
+.create-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 /* Wrapper for multiple lists */
 .lists-wrapper {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   margin-top: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 /* Individual list container */
@@ -70,17 +84,6 @@
   justify-content: space-between;
   align-items: center;
 }
-.failure-container {
-  padding: 2rem;
-  text-align: center;
-}
-
-.failure-title {
-  margin-top: 1rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
 
 /* Item title (main text) */
 .item-title {
@@ -94,11 +97,58 @@
   font-style: italic;
   margin-top: 0.2rem;
 }
+
+/* Failure and Loading Views */
+.failure-container,
 .loading {
   padding: 2rem;
   text-align: center;
+}
+
+.failure-title {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.loading {
   font-size: 1.125rem;
   font-weight: 500;
+}
+
+/* Cancel and Update buttons */
+.action-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cancel,
+.update {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel {
+  background-color: #dc2626;
+}
+
+.cancel:hover {
+  background-color: #b91c1c;
+}
+
+.update {
+  background-color: #16a34a;
+}
+
+.update:hover {
+  background-color: #15803d;
 }
 
 /* Responsive adjustments */
