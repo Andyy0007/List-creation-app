@@ -1,4 +1,4 @@
-// src/components/FailureView.jsx
+// src/components/FailureView.jsx -->Displays error state with retry (on failed API fetch).
 export default function FailureView({ onRetry }) {
   return (
     <div className="failure-container">

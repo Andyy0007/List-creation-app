@@ -10,7 +10,7 @@ export default function ListItem({ item, onMove, direction }) {
     <div className="item-card">
       <div>
         <p className="item-title">{item.name}</p>
-        <p className="item-subtitle">{item.species}</p>
+        <p className="item-subtitle">{item.description}</p>
       </div>
       {onMove && (
         <div className="arrow-buttons">
