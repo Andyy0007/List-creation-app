@@ -1,12 +1,30 @@
-# React + Vite
+# List Creation App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a responsive React application that allows users to select two existing lists and create a new list by transferring items between them using directional arrows. Built with Vite for fast development and deployed on GitHub Pages.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fetches list data from an API
+- Displays loading and error views
+- Allows selection of two lists
+- Enables item transfer between selected lists and a new list
+- Supports cancel and update functionality for the new list
+- Responsive design (mobile and desktop friendly)
 
-## Expanding the ESLint configuration
+##  Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[🔗 Click here to view the deployed app](https://github.com/Andyy0007/List-creation-app)
+
+## Tech Stack
+
+- React + Vite
+- JavaScript (ES6+)
+- HTML/CSS (No Tailwind)
+- GitHub Pages (for deployment)
+
+## 🖼 Preview
+
+<img width="414" alt="image" src="https://github.com/user-attachments/assets/153f9f9c-01c8-4065-8dd8-ae7f937433a5" />
+
+
+
