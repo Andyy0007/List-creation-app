@@ -1,17 +1,23 @@
-// src/App.jsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useListApi from './hooks/useListApi'
 import Loading from './components/Loading'
 import FailureView from './components/FailureView'
 import ListContainer from './components/ListContainer'
+import './App.css' // Import custom CSS
 
 function App() {
   const { data, status, fetchLists } = useListApi()
-  const [selected, setSelected] = useState([])      // which two lists are checked
-  const [creating, setCreating] = useState(false)   // are we in “create mode”?
+  const [localData, setLocalData] = useState([])
+  const [selected, setSelected] = useState([])
+  const [creating, setCreating] = useState(false)
   const [newListItems, setNewListItems] = useState([])
 
-  // toggle checkbox
+  useEffect(() => {
+    if (status === 'success') {
+      setLocalData(data)
+    }
+  }, [status, data])
+
   const toggleList = num => {
     setSelected(prev =>
       prev.includes(num) ? prev.filter(x => x !== num) : [...prev, num]
@@ -29,28 +35,25 @@ function App() {
   const cancelCreate = () => {
     setCreating(false)
     setNewListItems([])
+    setLocalData(data)
   }
 
   const updateLists = () => {
-    // merge newListItems into data – here you’d usually send API update
-    // For now just exit “create mode”
     setCreating(false)
     setNewListItems([])
   }
 
-  // move an item from one list to the “new” list (list_number = 3)
   const moveToNew = (item, origin) => {
-    setData(prev =>
+    setLocalData(prev =>
       prev.map(i =>
         i.id === item.id ? { ...i, list_number: 3 } : i
       )
     )
-    setNewListItems(prev => [...prev, item])
+    setNewListItems(prev => [...prev, { ...item, list_number: 3 }])
   }
 
-  // move item from new list back to selected[0] or selected[1]
   const moveFromNew = (item, targetListNum) => {
-    setData(prev =>
+    setLocalData(prev =>
       prev.map(i =>
         i.id === item.id ? { ...i, list_number: targetListNum } : i
       )
@@ -61,85 +64,66 @@ function App() {
   if (status === 'loading') return <Loading />
   if (status === 'failure') return <FailureView onRetry={fetchLists} />
 
-  // helper: items in a given list number
-  const itemsOf = num => data.filter(i => i.list_number === num)
-
-  // get the two list numbers available in the fetched data
-  const listNums = [...new Set(data.map(i => i.list_number))]
+  const itemsOf = num => localData.filter(i => i.list_number === num)
+  const listNums = [...new Set(localData.map(i => i.list_number))].filter(n => n !== 3)
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start p-6">
-      <h1 className="list-header">List Creation</h1>
-
-      {!creating && (
-        <div className="mb-4">
-          <button
-            onClick={handleCreateClick}
-            className="button"
-          >
-            Create a new list
-          </button>
-        </div>
-      )}
+    <div className="app-container">
+      <div className="header">
+        <h1>List Creation</h1>
+        {!creating && (
+          <div className="create-button">
+            <button onClick={handleCreateClick}>Create a new list</button>
+          </div>
+        )}
+      </div>
 
       <div className="lists-wrapper">
-        {/* render each existing list container */}
-        {listNums.map(num => (
-          <ListContainer
-            key={num}
-            title={`List ${num}`}
-            items={itemsOf(num)}
-            checked={!creating ? selected.includes(num) : false}
-            onCheck={!creating ? () => toggleList(num) : null}
-            direction={
-              creating
-                ? num === selected[0]
-                  ? 'right'
-                  : num === selected[1]
-                  ? 'left'
-                  : null
-                : null
-            }
-            onMoveItem={
-              creating && (num === selected[0] || num === selected[1])
-                ? item => moveToNew(item, num)
-                : null
-            }
-          />
-        ))}
+        {creating ? (
+          <>
+            <ListContainer
+              key={selected[0]}
+              title={`List ${selected[0]}`}
+              items={itemsOf(selected[0])}
+              direction="right"
+              onMoveItem={item => moveToNew(item, selected[0])}
+            />
 
-        {/* middle “new list” when creating */}
-        {creating && (
-          <ListContainer
-            title="New List"
-            items={newListItems}
-            direction="both"
-            onMoveItem={item => {
-              // decide target: left or right based on current placement
-              const target =
-                item.list_number === selected[0]
-                  ? selected[1]
-                  : selected[0]
-              moveFromNew(item, target)
-            }}
-          />
+            <ListContainer
+              title="New List"
+              items={newListItems}
+              direction="both"
+              onMoveItem={item => {
+                const target = item.list_number === selected[0] ? selected[1] : selected[0]
+                moveFromNew(item, target)
+              }}
+            />
+
+            <ListContainer
+              key={selected[1]}
+              title={`List ${selected[1]}`}
+              items={itemsOf(selected[1])}
+              direction="left"
+              onMoveItem={item => moveToNew(item, selected[1])}
+            />
+          </>
+        ) : (
+          listNums.map(num => (
+            <ListContainer
+              key={num}
+              title={`List ${num}`}
+              items={itemsOf(num)}
+              checked={selected.includes(num)}
+              onCheck={() => toggleList(num)}
+            />
+          ))
         )}
       </div>
 
       {creating && (
-        <div className="text-center mt-6 space-x-4">
-          <button
-            onClick={cancelCreate}
-            className="px-4 py-2 bg-red-500 text-white rounded"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={updateLists}
-            className="px-4 py-2 bg-green-600 text-white rounded"
-          >
-            Update
-          </button>
+        <div className="action-buttons">
+          <button onClick={cancelCreate} className="cancel">Cancel</button>
+          <button onClick={updateLists} className="update">Update</button>
         </div>
       )}
     </div>
